@@ -12,14 +12,21 @@ public class ProjectSecurityConfig {
 
     @Bean
     @Order(SecurityProperties.BASIC_AUTH_ORDER)
-
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .anyRequest().denyAll()
+                .anyRequest().permitAll()
                 .and().httpBasic()
                 .and().formLogin();
         return http.build();
     }
+
+//   SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+//        http.authorizeRequests()
+//                .anyRequest().denyAll()
+//                .and().httpBasic()
+//                .and().formLogin();
+//        return http.build();
+//   }
 
     // Below is the custom security configurations.
 
