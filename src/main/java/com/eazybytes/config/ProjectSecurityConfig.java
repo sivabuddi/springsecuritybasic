@@ -12,13 +12,13 @@ public class ProjectSecurityConfig {
 
     @Bean
     @Order(SecurityProperties.BASIC_AUTH_ORDER)
-    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .anyRequest().permitAll()
-                .and().httpBasic()
-                .and().formLogin();
-        return http.build();
-    }
+//    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+//        http.authorizeRequests()
+//                .anyRequest().permitAll()
+//                .and().httpBasic()
+//                .and().formLogin();
+//        return http.build();
+//    }
 
 //   SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 //        http.authorizeRequests()
@@ -30,13 +30,13 @@ public class ProjectSecurityConfig {
 
     // Below is the custom security configurations.
 
-    /*SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/myaccount","/mybalance","/myloans","/mycards").authenticated()
                 .antMatchers("/mynotices","/mycontacts").permitAll()
                 .and().httpBasic()
                 .and().formLogin();
                 return http.build();
-    }*/
+    }
 
 }
