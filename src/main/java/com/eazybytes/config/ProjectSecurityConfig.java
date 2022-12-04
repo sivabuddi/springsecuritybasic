@@ -15,31 +15,24 @@ import org.springframework.security.web.SecurityFilterChain;
 import javax.sql.DataSource;
 
 @Configuration // responsible for configuration and create beans for those classes mentioned in this class.
-@EnableWebSecurity
 public class ProjectSecurityConfig {
 
     @Bean
     @Order(SecurityProperties.BASIC_AUTH_ORDER)
      SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.csrf().disable().authorizeRequests()
                 .antMatchers("/myaccount","/mybalance","/myloans","/mycards").authenticated()
-                .antMatchers("/mynotices","/mycontacts").permitAll()
+                .antMatchers("/mynotices","/mycontacts","/register").permitAll()
                 .and().httpBasic()
                 .and().formLogin();
                 return http.build();
     }
-//    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-//        http.authorizeRequests()
-//                .anyRequest().permitAll()
-//                .and().httpBasic()
-//                .and().formLogin();
-//        return http.build();
-//    }
 
-    @Bean
-    public UserDetailsService userDetailsService(DataSource dataSource){
-        return new JdbcUserDetailsManager(dataSource);
-    }
+
+//    @Bean
+//     public UserDetailsService userDetailsService(DataSource dataSource){
+//        return new JdbcUserDetailsManager(dataSource);
+//    }
 
 
     @Bean
