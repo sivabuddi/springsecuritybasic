@@ -7,6 +7,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
@@ -29,34 +30,10 @@ public class ProjectSecurityConfig {
     }
 
 
-//    @Bean
-//     public UserDetailsService userDetailsService(DataSource dataSource){
-//        return new JdbcUserDetailsManager(dataSource);
-//    }
-
-
     @Bean
     public PasswordEncoder passwordEncoder(){
-        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
 
-//   SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-//        http.authorizeRequests()
-//                .anyRequest().denyAll()
-//                .and().httpBasic()
-//                .and().formLogin();
-//        return http.build();
-//   }
-
-    // Below is the custom security configurations.
-
-    /*SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/myaccount","/mybalance","/myloans","/mycards").authenticated()
-                .antMatchers("/mynotices","/mycontacts").permitAll()
-                .and().httpBasic()
-                .and().formLogin();
-                return http.build();
-    }*/
 
 }
